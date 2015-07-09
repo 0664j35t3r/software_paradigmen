@@ -1,0 +1,350 @@
+\documentclass[10pt, a4paper]{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+%\usepackage[euler]{textgreek}
+\usepackage{algpseudocode}
+\usepackage[ngerman]{babel}
+
+\usepackage{fancyvrb}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\usepackage{amssymb, amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage{fancyhdr}
+\usepackage{fullpage}
+\usepackage{alltt}
+\usepackage{soul}
+\pagestyle{fancy}
+\setlength{\headheight}{12.4pt}
+\setlength{\headsep}{1.5\headheight}
+
+% Ãœbungsblatt-Nummer eintragen
+\newcommand{\AssignmentNumber}{2}
+
+% 1. Person eintragen
+\newcommand{\FirstAuthor}{LORENZ}
+\newcommand{\FirstAuthorFirstName}{Peter}
+\newcommand{\FirstAuthorMatnum}{}
+
+% 2. Person eintragen
+\newcommand{\SecAuthor}{ZIKO}
+\newcommand{\SecAuthorFirstName}{Haris}
+\newcommand{\SecAuthorMatnum}{}
+
+%\newcommand{\ul}{\underline}
+%\newcommand{\omega}{$\omega$}
+%\newcommand{\omega'}{$\omega'$}
+%\newcommand{\vert}{$\vert$}
+%\newcommand{\delta}{$\delta$}
+\newcommand{\AuthorFront}{{\normalsize
+\begin{tabular}{|c|c|c|} \hline
+    \textbf{Nachname} & \textbf{Vorname}       & \textbf{Matrikelnummer} \\ \hline \hline
+    \FirstAuthor      & \FirstAuthorFirstName  & \FirstAuthorMatnum      \\ \hline
+    \SecAuthor        & \SecAuthorFirstName    & \SecAuthorMatnum        \\ \hline
+\end{tabular}}}
+
+\author{\AuthorFront}
+\newcommand{\Author}{\FirstAuthorMatnum, \SecAuthorMatnum}
+
+\date{} % Kein Datum angegeben
+\fancyfoot{} % Seitenzahl unten nicht anzeigen
+
+\lhead{Excercise \AssignmentNumber}
+\chead{\Author}
+\rhead{Page \thepage}
+
+\title{Software Paradigms SS 2015 \AssignmentNumber}
+
+\begin{document}
+
+\newcommand{\seccounter}{\addtocounter{section}{1} \thesection}
+\newcommand{\beispiel}[2]{\subsection*{Example #1 \qquad}}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Bsp 1 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+    \begin{alltt}
+        \(\delta\) \underline{count} = \underline{if eq?(x, nil) then 0 else plus(count(rest(x)),1)} \\
+    \end{alltt} 
+    
+    We define $f_d$($\omega$(\underline(x))) as "{}Golden Device"{}, a function (L $\rightarrow \mathbb{N}$).\\
+    
+    $\vert \omega$(\underline(x)) $\vert$ = 
+    $\left\{
+        \begin{array}{ll}
+             0 & eq?(\omega(\underline x), []) \\
+             plus(count(rest(x)), 1) & other \\
+        \end{array}
+    \right.$ \\
+    
+    Idea - if $\delta$\underline{count} is correct $\vert \omega$(\underline{x}) $\vert$ = n (n $\in
+    \mathbb{N}$), then is $\delta$\underline{count} is also correct $\vert\omega$(\underline{x})$\vert$ = n + 1. \\
+    
+    \begin{description}
+        \item \textbf{Lemma:} $\forall\omega(x) \in L$, $\vert \omega$(x) $\vert \leq$ n: I($\delta$,
+        $\omega$, count(x) = $f_d$($\omega$(x)) 
+        
+        \item \textbf{Base:} $\omega$(\underline{x})$ \in $L,$\vert\omega$(\underline{x}) $\vert$ = 0 \\
+         \begin{tabular}{ l }
+            \hphantom{=} I($\delta$, $\omega$, \underline{count(x)}) \\
+            = I($\delta$, $\omega$, \underline{if eq?(x, nil) then 0 else plus(count(rest(x)),1)}) \\ \\
+
+            NR: \\
+            \hphantom{=} I($\delta$, $\omega$, \underline{eq?(x, nil)}) \\
+              = eq?(I($\delta$, $\omega$, \underline{x}), I($\delta$, $\omega$, \underline{nil})) \\
+              = eq?($\omega$(\underline(x)), []) \\
+              = eq?([], []) \\
+              = T \\ %s39 skriptum gruss \\
+            \end{tabular}
+       
+       I($\delta$, $\omega$, \underline{0}) \\
+       Since $\vert\omega$(x) $\vert$ = 0 must be $\omega$(\underline{x}) = []. \\
+       = I($\delta$, $\omega$, \underline{nil}) = [] = $f_d$([]) = $f_d$($\omega$(\underline{x}))
+       
+        \item \textbf{Step:} $\omega$(x) $\in L$, $\vert \omega$(\underline(x)) $\vert$ = n + 1, n $\in     \mathbb{N}$ \\
+         \textcolor{white}{=} I($\delta$, $\omega$, \underline{count(x)})  \\
+         = I($\delta$, $\omega$, \underline{if eq?(x, nil) then 0 else plus(count(rest(x)),1)}) \\ \\
+         % NR Tabular --------------------------------- %
+            \begin{tabular}{ l }
+                NR: \\
+                \hphantom{=} I($\delta$, $\omega$, \underline{eq?(x, nil)})  \\
+                 = eq?(I($\delta$, $\omega$, \underline{x}), I($\delta$, $\omega$, \underline{nil})) \\
+                 = eq?($\omega$(\underline{x}), []) \\
+                 = eq?(x, []) = F \\
+                \end{tabular}
+                
+                
+                 = I($\delta$, $\omega$, \underline{plus(count(rest(x)), 1)}) \\
+                $\omega'$(\underline{x}) = I($\delta$, $\omega$, \underline{rest(x)}) =
+                rest(I($\delta$, $\omega$, \underline{x})) = rest($\omega$(\underline{x}))
+                
+                = I($\delta$, $\omega$', \underline{count(x)}) \\
+                
+                The induction hypothesis is valid for this environment. We apply the the induction 
+                hypothesis:
+                
+                = $f_d$($\omega'$(\underline{x})) \\
+                = $f_d$(rest($\omega$(\underline{x})))
+                
+    \end{description}
+
+% Bsp 2 ------------------------------------------------------
+\beispiel{\seccounter}{3}
+    \begin{alltt}
+        \(\delta\) \underline{gcd} = \underline{if gt?(a,b) then gcd2(a,b) else gcd2(b,a)} 
+        \(\delta\) \underline{gcd2} = \underline{if eq?(b,0) then a else gcd2(b, mod(a,b))} 
+        \(\delta\) \underline{mod} = \underline{if gt?(a,b) then mod(minus(a,b), b) else if eq?(a,b) then 0 else a}
+    \end{alltt}
+
+% Bsp 3 ------------------------------------------------------
+\beispiel{\seccounter}{1}
+    \begin{alltt}
+    \(\delta\) \underline{bijunct} = \underline{if atom?( first(x) ) then}  
+        \underline{build( bijunct2(first(x), first(y)), bijunct(rest(x),rest(y)) )} 
+        \underline{else} \underline{nil}
+    \(\delta\)\underline{bijunct2} = \underline{if is0?(x) then}
+        \underline{if is0?(y) then 1 else if is1?(y) then 0 else}
+        \underline{if is1?(x) then}
+        \underline{if is0?(y) then 0 else if is1?(y) then 1} 
+    \end{alltt}
+    
+    Golden Device: $f_d$($\omega$($l_x$), $\omega$($l_y$)),  B $\times$ B $\rightarrow$ B \\
+    $\sim$($I_{V}$($\omega$,$l_x$) $\mathbin{\oplus} I_V$($\omega$,$l_y$)) =
+    $\left\{
+        \begin{array}{ll}
+             \textbf{$l_x$} & \textbf{$l_y$} \\
+             0 & 0 = 1 \\
+             0 & 1 = 0 \\
+             1 & 0 = 0 \\
+             1 & 1 = 1 \\
+        \end{array}
+    \right.$
+    
+    \begin{description} 
+
+    \item \textbf{Lemma:} $\forall \omega \in$ ENV : $I_{\varepsilon}$ ($\delta$, $\omega$, bijunct(x,y)) = 
+    $\sim$($I_V$($\omega$,x) $\mathbin{\oplus}$ $I_V$($\omega$,y))  if x, y $\in$ L, $\omega \in $ENV \\
+    Proof: Let $\omega$(x) = [$l_1$, \dots, $l_k$] with $\forall l_i  \mathbb{B}$ and  $\omega$(y) = 
+    [$l_1$, \dots, $l_k$] with $\forall l_i$ $\mathbb{B}$ \\
+        \begin{tabular}{ l l  } % tabular --------------------------
+            $I_{\varepsilon}$($\delta$, $\omega$, bijunct(x, y)) &  \\
+            = $I_{\varepsilon}$($\delta$, $\omega'$, bijunct(x1, y1))  with \&  \\
+            \noindent\hspace*{8mm} $\omega'$(x1) = ($\delta$, $\omega$, x) = $\omega$(x) = 
+            [$l_1$, \dots, $l_n$]  &  \\
+            \noindent\hspace*{8mm} $\omega'$(y1) = ($\delta$, $\omega$, y) = $\omega$(y) = [$l_1$, 
+            \dots,$l_n$] &  \\
+            = $\sim$($\omega'$(x1) $\mathbin{\oplus}$ $\omega$'(y1))                & [Lemma] \\
+        \end{tabular}
+        
+    \item \textbf{Base:} $\omega$(\underline{x}) = [], $\omega$(\underline{y}) = [], $\vert\omega$(x)$\vert$ = $\vert\omega$(y)$\vert$ = 1
+    
+        \begin{tabular}{ l l } 
+            = I($\delta$, $\omega$, \underline{bijunct(x,y)})       &  \\
+            = I($\delta$, $\omega$', \underline{if atom?(first(x1) then build(bijunct2(first(x), first(y)),
+            bijunct(rest(x),rest(y)))))} & \\
+            \noindent\hspace*{8mm} $\omega'$(\underline{x1}) = I($\delta$, $\omega$, \underline{x}) = [] & \\
+            NR: I($\delta$, $\omega$', atom?(\underline{first(x1)}) = atom?(I($\delta$, $\omega$,
+            \underline{x})) = atom?
+            (first([]) = atom?([]) = F & \\
+            
+           = I($\delta$, $\omega$, \underline{nil}) = [] & \\
+        \end{tabular}
+        
+    \item \textbf{Step:} $\omega$(x) = [] + [$l_1$, \dots, $l_n$], $\vert\omega$(x) $\vert$ = $\vert$
+    $\omega(y)$ $\vert$ = n + 1
+    
+    \begin{tabular}{ l l l } % tabular --------------------------
+        \textcolor{white}{=} I($\delta$, $\omega$, \underline{bijunct(x, y))} )       &     \\
+        = I($\delta$, $\omega$, \underline{if atom?( first(x) ) then 
+        build( bijunct2( first(x), first(y) ), bijunct(rest(x),rest(y)))})  & \\ \\
+
+        case distinction towards atom?(first(x)):  & \\
+
+        \noindent\hspace*{5mm} 1. case: atom?(first($\omega$(x))) = F & \\
+        \noindent\hspace*{10mm} I($\delta$, $\omega$, atom?(first(x))) = atom?(I($\delta$, $\omega$,
+        \underline{first(x)}))
+        = atom?(first(I($\delta$,$\omega$, \underline{x}))) = F \\
+        \noindent\hspace*{10mm} = I($\delta$, $\omega$, \underline{nil}) = [] \\
+
+        \noindent\hspace*{5mm} 2. case: atom?(first($\omega$(x)) = T & \\
+        \noindent\hspace*{10mm} NR: I($\delta$, $\omega$, atom?(first($\omega$(x)))) = 
+        atom?(I($\delta$, $\omega$, first(x)))
+        = atom?(first(I($\delta$, $\omega$, \underline{x}))) = T \\
+
+        \noindent\hspace*{8mm} =I($\delta$, $\omega$, \underline{if atom?( first(x) ) then} 
+        \underline{build( bijunct2( first(x), first(y) ), bijunct(rest(x),rest(y)) ) else nil}) \\ \\
+
+        \noindent\hspace*{8mm} Since $\vert$ $\omega$(\underline{x}) $\vert$ > 1, consequently
+        $\omega$(\underline{x}) $\neq$ [] \\
+        \noindent\hspace*{8mm} = I( $\delta$, $\omega$, \underline{build( bijunct2( first(x), first(y) ),
+        bijunct(rest(x),rest(y)) )}) \\
+
+
+        \noindent\hspace*{8mm} NR: I($\delta$, $\omega$, bijunct2( first(x), first(y) ) = $f_d$($\omega$(x),
+        $\omega$(y)) \\
+
+            q.e.d
+        \end{tabular} 
+        
+    \end{description}
+
+% Bsp 4 ------------------------------------------------------
+\beispiel{\seccounter}{3}
+
+    \begin{verbatim}
+    def reverse(as : List[Int]) : List[Int] = as match {
+      case Nil   => Nil
+      case x::xs => reverse(xs):+x
+    }
+
+    def append(as : List[Int], bs : List[Int]) : List[Int] = as match {
+      case Nil   => bs
+      case x::xs => x::append(xs, bs)
+    }
+    \end{verbatim}
+    
+
+    \begin{description} 
+        \item \textbf{Hypothesis:} reverse(append(as, bs)) = append(reverse(bs), reverse(as))            
+        \item \textbf{Base:} as with Nil substituted \\
+            \begin{tabular}{ l l }
+                \textcolor{white}{=} reverse(append(Nil,bs))   & \\
+                = append(reverse(bs),reverse(Nil))             & [inductive hypothesis l.r.]
+            \end{tabular}
+        \item \textbf{Step:} as with a::as extended \\
+            \begin{tabular}{ l l }
+                \textcolor{white}{=} reverse( append(a::as,bs) )        &                        \\
+                = reverse( a::append(as, bs) )                          & [def. append l.r.]     \\
+                = reverse( append(as, bs) ):+a                          & [def. reverse l.r.]    \\
+                = append( reverse(bs), reverse(as) ):+a                 & [induction hypothesis] \\
+                = append( reverse(bs), reverse(as):+a )                 & [associative of append]\\
+                = append( reverse(bs), reverse(a::as) )                 & [def. reverse r.l.]    \\
+                q.e.d
+            \end{tabular} 
+    \end{description}
+    
+    
+% Bsp 5 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+
+    \begin{verbatim}
+    def without(x : Int, to_check : List[Int]) : Boolean = to_check match {
+       case head::tail => if(head == x) false else without(x, tail)
+       case Nil => true
+    }
+    
+    def append(as : List[Int], bs : List[Int]) : List[Int] = as match {
+      case Nil   => bs
+      case x::xs => x::append(xs, bs)
+    }
+    \end{verbatim}
+    
+    \begin{description}
+        \item \textbf{Hypothesis:} without( x, append( as, bs ) ) = without( x, as ) \&\& without( x, bs )
+        \item \textbf{Base:} as with Nil substituted \\
+            \begin{tabular}{ l l }
+                \textcolor{white}{=} without( x, append( Nil, bs ) )       & \\
+                = without( x, Nil ) \&\& without( x, bs )                 & [induction hypothesis] \\
+            \end{tabular}
+        \item \textbf{Step:} as with a::as extended \\
+            \begin{tabular}{ l l }
+                \textcolor{white}{=} without( x, append( a::as, bs ) )    &                           \\
+                = without( x, a::append(as, bs) )                       & [def. append l.r.]  \\
+                = if ( a == x ) false else without( x, append( as, bs ) )     & [def. without l.r.] \\
+                = if ( a == x ) false else without( x, as ) \&\& without( x, bs ) & [induction hypothesis] \\
+                = without( x, a::as ) \&\& without( x, bs )                 & [def. without r.l.] \\
+                q.e.d
+            \end{tabular}
+    \end{description}
+
+
+% Bsp 6 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+
+    \begin{verbatim}
+    def sum(as: List[Int]) : Int = as match {
+      case Nil => 0
+      case x::xs => x + sum(xs)
+    }
+
+    def sum1(as: List[Int], i : Int): Int = as match {
+      case Nil => i
+      case x::xs => sum1(xs, i + x)
+    }
+    \end{verbatim}
+
+    \begin{description} 
+        \item \textbf{Hypothesis:} sum(as) = sum1(as, 0)
+        \item \textbf{Base:} as as Nil substituted \\
+            \begin{tabular}{ l l }
+                \textcolor{white}{=} sum1(Nil, 0)     & \\
+                = 0                                   & [def. sum1 l.r.] \\
+                = sum(Nil)                            & [def. sum r.l.]
+            \end{tabular}
+        \item \textbf{Step:} as with a::as extended \\
+            \begin{tabular}{ l l }
+                \textcolor{white}{=} sum1(a::as, 0)    & \\
+                = sum1(as, 0 + a)  & [def. sum1 l.r.] \\
+                = sum1(as, a)      & [arithmetic] \\
+                = a + sum(as)      & [induction hypothesis r.l.] \\
+                = sum(a::as)       & [def. sum r.l.] \\
+                q.e.d
+            \end{tabular}
+    \end{description}
+
+\end{document}

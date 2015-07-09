@@ -1,0 +1,46 @@
+[0m[[0minfo[0m] [0m[32mMySWPInterpreterTests:[0m[0m
+[0m[[0minfo[0m] [0m[32m- Parser short program[0m[0m
+[0m[[0minfo[0m] [0m[32m- Parser defect program[0m[0m
+[0m[[0minfo[0m] [0m[32m- Interpreter program without functions[0m[0m
+[0m[[0minfo[0m] [0m[32m- Interpreter short program[0m[0m
+[0m[[0minfo[0m] [0m[32m- DivByZero Exception[0m[0m
+[0m[[0minfo[0m] [0m[32m- TypeMismatch Exception[0m[0m
+[0m[[0minfo[0m] [0m[32m- TypeMismatch Exception1[0m[0m
+[0m[[0minfo[0m] [0m[32m- TypeMismatch Exception2[0m[0m
+[0m[[0minfo[0m] [0m[32m- TypeMismatch Exception3[0m[0m
+[0m[[0minfo[0m] [0m[32m- TypeMismatch Exception4[0m[0m
+[0m[[0minfo[0m] [0m[32m- TypeMismatch Exception5[0m[0m
+[0m[[0minfo[0m] [0m[32m- TypeMismatch Exception6[0m[0m
+[0m[[0minfo[0m] [0m[32m- TypeMismatch Exception7[0m[0m
+[0m[[0minfo[0m] [0m[32m- Custom Exception[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test build[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test build1[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test build2[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exception sequence 1[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exception sequence 2[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exception sequence 3[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exception sequence 4[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exception sequence 5[0m[0m
+[0m[[0minfo[0m] [0m[32m- rest 1[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test first[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test first1[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test firstTypeMismatch[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test firstNil[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test plus[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test minus[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test mult[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test div[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test eq0[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test eq1[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test lt0[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test lt1[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test rest[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test restTypeMismatch[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test restNil[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test divby0[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exceptions sequence 6[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exception sequence 7[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exception sequence 8[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exceptions sequence 9[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exceptions sequence 10[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test exceptions sequence 11[0m[0m

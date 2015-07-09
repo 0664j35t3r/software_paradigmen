@@ -1,0 +1,39 @@
+[0m[[0minfo[0m] [0m[32mSWPInterpreterTests:[0m[0m
+[0m[[0minfo[0m] [0m[32m- Parser short program[0m[0m
+[0m[[0minfo[0m] [0m[32m- Parser defect program[0m[0m
+[0m[[0minfo[0m] [0m[32m- Interpreter program with only build in functions[0m[0m
+[0m[[0minfo[0m] [0m[32m- Interpreter short program[0m[0m
+[0m[[0minfo[0m] [0m[32m- Some calcs[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test cond[0m[0m
+[0m[[0minfo[0m] [0m[32m- Test cond recursive[0m[0m
+[0m[[0minfo[0m] [0m[31m- DivByZero Exception *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  scala.NotImplementedError: an implementation is missing[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.Predef$.$qmark$qmark$qmark(Predef.scala:225)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at Interpreter$.interpret(Interpreter.scala:85)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at Interpreter$.interpret(Interpreter.scala:63)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at Interpreter$$anonfun$3.apply(Interpreter.scala:24)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at Interpreter$$anonfun$3.apply(Interpreter.scala:24)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.collection.immutable.List.map(List.scala:277)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at Interpreter$.interpret(Interpreter.scala:24)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at SWPInterpreter$.evaluateProgram(SWPInterpreter.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at SWPInterpreterTests$$anonfun$8.apply$mcV$sp(SWPInterpreterTests.scala:81)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at SWPInterpreterTests$$anonfun$8.apply(SWPInterpreterTests.scala:73)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[31m- TypeMismatch Exception *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  scala.NotImplementedError: an implementation is missing[0m[0m
+[0m[[0minfo[0m] [0m[31m  at scala.Predef$.$qmark$qmark$qmark(Predef.scala:225)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at Interpreter$.interpret(Interpreter.scala:16)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at Interpreter$.interpret(Interpreter.scala:111)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at SWPInterpreter$.evaluateProgram(SWPInterpreter.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at SWPInterpreterTests$$anonfun$9.apply$mcV$sp(SWPInterpreterTests.scala:93)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at SWPInterpreterTests$$anonfun$9.apply(SWPInterpreterTests.scala:86)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at SWPInterpreterTests$$anonfun$9.apply(SWPInterpreterTests.scala:86)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.Transformer$$anonfun$apply$1.apply$mcV$sp(Transformer.scala:22)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.OutcomeOf$class.outcomeOf(OutcomeOf.scala:85)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at org.scalatest.OutcomeOf$.outcomeOf(OutcomeOf.scala:104)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m
+[0m[[0minfo[0m] [0m[31m- Custom Exception *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  Expected "[5]", but got "[ValHandler(MyException,ValInteger(5))]" (SWPInterpreterTests.scala:105)[0m[0m
+[0m[[0minfo[0m] [0m[32m- Build2[0m[0m
+[0m[[0minfo[0m] [0m[32m- first[0m[0m
+[0m[[0minfo[0m] [0m[32m- atom[0m[0m

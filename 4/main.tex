@@ -1,0 +1,542 @@
+\documentclass[10pt, a4paper]{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+%\usepackage[euler]{textgreek}
+\usepackage{algpseudocode}
+\usepackage[ngerman]{babel}
+
+\usepackage{fancyvrb}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\usepackage{amssymb, amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage{fancyhdr}
+\usepackage{fullpage}
+\usepackage{alltt}
+\usepackage{soul}
+\usepackage{tabularx}
+\pagestyle{fancy}
+\setlength{\headheight}{12.4pt}
+\setlength{\headsep}{1.5\headheight}
+
+% Ãœbungsblatt-Nummer eintragen
+\newcommand{\AssignmentNumber}{4}
+
+% 1. Person eintragen
+\newcommand{\FirstAuthor}{LORENZ}
+\newcommand{\FirstAuthorFirstName}{Peter}
+\newcommand{\FirstAuthorMatnum}{}
+
+% 2. Person eintragen
+\newcommand{\SecAuthor}{ZIKO}
+\newcommand{\SecAuthorFirstName}{Haris}
+\newcommand{\SecAuthorMatnum}{}
+
+%\newcommand{\ul}{\underline}
+%\newcommand{\omega}{$\omega$}
+%\newcommand{\omega'}{$\omega'$}
+%\newcommand{\vert}{$\vert$}
+%\newcommand{\delta}{$\delta$}
+\newcommand{\AuthorFront}{{\normalsize
+\begin{tabular}{|c|c|c|} \hline
+
+    \textbf{Nachname} & \textbf{Vorname}       & \textbf{Matrikelnummer} \\ \hline \hline
+    \FirstAuthor      & \FirstAuthorFirstName  & \FirstAuthorMatnum      \\ \hline
+    \SecAuthor        & \SecAuthorFirstName    & \SecAuthorMatnum        \\ \hline
+\end{tabular}}}
+
+\author{\AuthorFront}
+\newcommand{\Author}{\FirstAuthorMatnum, \SecAuthorMatnum}
+
+\date{} % Kein Datum angegeben
+\fancyfoot{} % Seitenzahl unten nicht anzeigen
+
+\lhead{Excercise \AssignmentNumber}
+\chead{\Author}
+\rhead{Page \thepage}
+
+\title{Software Paradigms SS 2015 \AssignmentNumber}
+
+\newcommand{\letpi}{$\pi$}
+\newcommand{\letomega}{$\omega$}
+\newcommand{\letTheta}{$\Theta$}
+
+\newcommand{\InterA}{$I_{\mathcal{A}}$}
+\newcommand{\InterP}{$I_{\mathcal{P}}$}
+\newcommand{\InterT}{$I_{\mathcal{T}}$}
+
+\newcommand{\pipe}{$\vert$\hphantom{i}}
+\newcommand{\TildeVar}{$\mathcal{~}$}
+
+\newcommand{\unl}[1]{\underline{#1}}
+%\newcommand{\math}{\mathcal{A}}
+
+% column with
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\begin{document}
+
+\newcommand{\seccounter}{\addtocounter{section}{1} \thesection}
+\newcommand{\beispiel}[2]{\subsection*{Exercise #1 \qquad}}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Bsp 1 ------------------------------------------------------
+\beispiel{\seccounter}{1}
+
+% 1.
+\setcounter{secnumdepth}{1}
+\subsubsection{1.}
+t = p(Y,f(X),a), t' = p(X,f(b), X)\\
+
+$\theta$ = \{X/Y\} \\
+t = p(Y,f(Y), a); t' = p(Y,f(b),Y)\\
+
+$\theta$ = $\theta$ $\cup$ \{Y/b\}\\
+t = p(b,f(b),a); t' = p(b,f(b), b)\\
+
+%$\theta$ = $\theta$ $\cup$ \{Y/a\} \\
+%t = p(a,f(b),a); t' = p'(a,f(b),a) \\
+%$\square$
+
+%MGU = \{X/Y, X/b, Y/a\}
+
+Not unifiable, see rule 2a from Slides 7 - S17. 
+There are different values, and no Variables.
+
+
+% 2.
+\subsubsection{2.}
+
+t = q(f(a),g(f(a)),Y), t' = q(X,g(X),f(g(a))) \\
+
+\letTheta = \{X/f(a)\} \\
+t = q(f(a),g(f(a)),Y), t' = q(f(a),g(f(a)),f(g(a))) \\
+
+\letTheta = \letTheta $\cup$ \{Y/f(g(a))\} \\
+t = q(f(a),g(f(a)),f(g(a))), t' = q(f(a),g(f(a)),f(g(a)))  \\
+$\square$
+
+
+MGU = \{X/f(a),Y/f(g(a))\}
+
+
+
+
+% 3.
+\subsubsection{3.}
+t = r(b,f(g(X)), Z) und t' = r(X,Z,f(g(a))) \\
+
+\letTheta = \{X/b\} \\
+r(b,f(g(b)), Z); r(b,Z,f(g(a))) \\
+
+\letTheta = \{Z/f(g(b))\} \\
+r(b,f(g(b)), f(g(b))); r(b,f(g(b)),f(g(a))) \\
+
+MGU = \{X/b, Z/f(g(b))\} \\
+
+
+Not unifiable. Slides 7 - S17.
+It exists a difference correspondig to 2.a, but there are not any variables. 
+The algorithm stops, because there is a difference between t and t'.
+
+
+% 4.
+\subsubsection{4.}
+
+t = s(X,c,Y), t' = s(g(a,b),Z,f(Y))\\
+
+\letTheta = \{X/g(a,b)\} \\
+t = s(g(a,b),c,Y), t' = s(g(a,b),Z,f(Y)) \\
+
+
+Not unifiable, see rule 2b from Slides 7 - S17.
+It is not possible to unify Y with f(Y).
+
+
+% 5.
+\subsubsection{5.}
+
+t = u(f(Z,g(X)),Z), t' = u(f(g(a),g(Z)), X) \\
+
+\letTheta = \{Z/g(a)\} \\
+t = u(f(g(a),g(X)),g(a)), t' = u(f(g(a),g(g(a))), X)\\
+
+\letTheta = \letTheta $\cup$ \{X/g(a)\} \\
+t = u(f(g(a),g(g(a))),g(a)), t' = u(f(g(a),g(g(a))), g(a)) \\
+$\square$ \\
+
+
+MGU = \{Z/g(a),X/g(a)\}
+
+
+% Bsp 2 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+
+Predicate for greater(X,Y)
+
+greater(s(\_), 0) :=.\\
+greater(s(X),s(Y)) := greater(X,Y)
+
+show, if the next statement is true or false:\\
+:=greater(s(s(s(0))), s(s(s(0))))
+
+$\neg$ greater(s(s(s(0))), s(s(s(0)))) \hphantom{00000} $\neg$ greater(X,Y) $\vee$ greater(s(X),s(Y))
+
+\{X\pipe s(s(0)),Y\pipe s(s(0))\}\\
+
+$\neg$ greater(s(s(0)), s(s(0))) \hphantom{00000} $\neg$ greater(X,Y) $\vee$ greater(s(X),s(Y))
+
+\{X\pipe s(0),Y\pipe s(0)\}\\
+
+$\neg$ greater(s(0), s(0)) \hphantom{00000} $\neg$ greater(X,Y) $\vee$ greater(s(X),s(Y))
+
+\{X\pipe 0,Y\pipe 0\}\\
+
+$\neg$ greater(0, 0) \hphantom{00000} $\neg$ greater(X,Y) $\vee$ greater(s(X),s(Y))
+
+Not possible, because no MGU exists.\\
+
+$\neg$ greater(0, 0) \hphantom{00000} $\neg$ greater(s(\_),0)
+
+Not possible, because left side is not equal to right side.
+
+Reject input => False
+
+% Bsp 3 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+
+% 1.
+\setcounter{secnumdepth}{1}
+\subsubsection{1.}
+\begin{verbatim}
+male(mannister).
+
+male(lombard).
+
+male(tytos).
+female(genna).
+
+male(jamballalia).
+
+male(kevan).
+male(lancel).
+male(willem).
+female(janei).
+
+male(tywin).
+male(jaime).
+female(cersei).
+male(tyrion).
+
+parent(mannister, lombard).
+parent(mannister, tytos).
+parent(mannister, jamballalia).
+
+parent(tytos, genna).
+parent(tytos, tywin).
+parent(tytos, kevan).
+
+parent(kevan, lancel).
+parent(kevan, willem).
+parent(kevan, janei).
+
+parent(tywin, jaime).
+parent(tywin, cersei).
+parent(tywin, tyrion).
+\end{verbatim}
+
+
+
+% 2.
+\subsubsection{2.}
+\begin{verbatim}
+grandp(X,Y)  :- parent(X, P), parent(P, Y).
+sibling(X,Y) :- parent(P,X), parent(P,Y), X\=Y.
+cousin(X,Y)  :- parent(A,X), parent(B,Y), sibling(A,B), male(X).
+
+\end{verbatim}
+c1 = grandp(X,Y)  $\vee$ $\neg$parent(X, P) $\vee$ $\neg$parent(P, Y).\\
+c2 = sibling(X,Y) $\vee$ $\neg$parent(P,X) $\vee$ $\neg$parent(P,Y) $\vee$ $\neg$X\=Y.\\
+c3 = cousin(X,Y)  $\vee$ $\neg$ male(X) $\vee$ $\neg$parent(A,X) $\vee$ $\neg$parent(B,Y) $\vee$ $\neg$ sibling(A,B). \\
+
+:= cousin(willem, jaime).\\
+
+\begin{tabular}{L{4cm} |L{3cm} |L{5cm}}
+Program & MGU & Rule  \\
+\hline \hline
+%----------------------------------------------------------------------------
+
+$\neg$cousin(willem, jaime) &                                  & cousin(X,Y)  $\vee$ $\neg$ male(X) $\vee$ $\neg$parent(A,X) $\vee$ $\neg$parent(B,Y) $\vee$ $\neg$ sibling(A,B) \\
+
+                            & $\theta$ = \{X/willem, Y/jaime\} & \\
+\hline
+%----------------------------------------------------------------------------
+$\neg$ male(willem) $\vee$ $\neg$parent(A,willem) $\vee$ $\neg$parent(B,jaime) $\vee$ \newline $\neg$ sibling(A,B) 
+                            &                                  & male(willem) \\
+\hline
+$\neg$parent(A,willem) $\vee$ $\neg$parent(B,jaime) $\vee$ \newline $\neg$ sibling(A,B) 
+                            &                                  & parent(kevan, willem) and parent(tywin, jaime) \\
+                            & $\theta$ = \{A/kevan, B/tywin\}  & \\
+\hline
+%----------------------------------------------------------------------------
+sibling(kevan,tywing)         &                                & sibling(X,Y) $\vee$ $\neg$parent(P,X) $\vee$ $\neg$parent(P,Y) $\vee$ $\neg$X\=Y. \\
+                             & $\theta$ = \{X/kevan, B/tywin\} & \\
+\hline
+%----------------------------------------------------------------------------
+$\neg$parent(P,X) $\vee$ $\neg$parent(P,Y) $\vee$ $\neg$X\=Y & & parent(tytos, kevan) and parent(tytos, tywan) \\
+                             & $\theta$ = \{P/tytos\} & \\
+
+\hline
+%----------------------------------------------------------------------------
+$\square$ & & \\
+\end{tabular}
+
+
+
+% 3.
+\subsubsection{3.}
+granddaughter(X,Y) :- grandp(Y,X), female(X).
+
+\begin{tabular}{L{4cm} |L{3cm} |L{5cm}}
+Program & MGU & Rule  \\
+\hline \hline
+%----------------------------------------------------------------------------
+:= granddaughter(X,tytos) & & granddaughter(X,Y) $\vee$ $\neg$grandp(Y,X) \newline $\vee$ female(X) \\
+                          &  $\theta$ = \{Y/tytos\}               &   \\         \hline
+$\neg$grandp(tytos,X) $\vee$ $\neg$female(X) &  & grandp(X,Y) $\vee$ $\neg$parent(X,P) $\vee$ $\neg$parent(P,Y) \\
+
+                          & $\theta$ = \{X/tytos\}              & \\
+\hline
+$\neg$parent(tytos, P) $\vee$ $\neg$p(P,Y)&                   &  parents(tytos, kevan). \\
+                          & $\theta$ = \{P/kevan\}            & \\
+\hline
+$\neg$parents(tytos, kevan) $\vee$ $\neg$parents(kevan,Y) &      & p(kevan, janei) \\
+                          & $\theta$ = \{Y/janei\}            & \\
+\hline
+parents(kevan, janei)       &             & \\
+$\square$  & &
+
+
+
+\end{tabular}
+
+% Bsp 4 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+
+% 1.
+\setcounter{secnumdepth}{1}
+\subsubsection{1.}
+
+edge(a, b, s(s(s(0)))).\\
+edge(a, c, s(0)).\\
+edge(c, d, s(s(0))).\\
+edge(b, d, s(s(0))).\\\\
+add(0,Y,Y).
+add(s(X),Y,s(Z)) := add(X,Y,Z).
+greaterequ(X,0).\\
+greaterequ(s(X), s(Y)) := greaterequ(X,Y).\\\\
+path(S,E,M) := find(S,E,N),greaterequ(M,N).\\\\
+find(S,E,L) := edge(S,E,L).\\
+find(S,E,N) := edge(S,X,L),find(X,E,N1),add(N1,L,N).
+
+% 2.
+\subsubsection{2.}
+
+c1: edge(a, b, s(s(s(0)))).\\
+c2: edge(a, c, s(0)).\\
+c3: edge(c, d, s(s(0))).\\
+c4: edge(b, d, s(s(0))).\\
+c5: add(0,Y,Y).
+c6: add(s(X),Y,s(Z)) $\vee$ $\neg$ add(X,Y,Z).
+c7: greaterequ(X,0).\\
+c8: greaterequ(s(X), s(Y)) $\vee$ $\neg$ greaterequ(X,Y).\\
+c9: path(S,E,M) $\vee$ $\neg$ find(S,E,N) $\vee$ $\neg$ greaterequ(M,N).\\
+c10: find(S,E,L) $\vee$ $\neg$ edge(S,E,L).\\
+c11: find(S,E,N) $\vee$ $\neg$ edge(S,X,L) $\vee$ $\neg$ find(X,E,N1) $\vee$ $\neg$ add(N1,L,N)\\
+
+
+\begin{tabular}{l|l|l}
+Program & MGU & Rule  \\
+\hline \hline
+
+$\neg$ path(a,d,s(s(s(s(0))))) & \{S/a, E/d, M/s(s(s(s(0))))\} & c9: path(S,E,M) \\
+&&$\vee$ $\neg$ find(S,E,N) \\
+&&$\vee$ $\neg$ greaterequ(M,N) \\
+\hline
+
+$\neg$ find(a,d,N) $\vee$ & \{S/a,E/d\}& c11: find(S,E,N)\\
+$\neg$ greaterequ(s(s(s(s(0)))),N) && $\vee$ $\neg$ edge(S,X,L)\\
+&& $\vee$ $\neg$ find(X,E,N1) \\
+&& $\vee$ $\neg$ add(N1,L,N)\\
+\hline
+
+$\neg$ edge(a,X,L) $\vee$ & \{X/c,L/s(0)\}& c2: edge(a, c, s(0))\\
+$\neg$ find(X,d,N1) $\vee$ && \\
+$\neg$ add(N1,L,N) && \\
+$\neg$ greaterequ(s(s(s(s(0)))),N) && \\
+\hline
+
+$\neg$ find(c,d,N1) $\vee$ & \{S/c,E/d/L/N1\} & c10: find(S,E,L) \\
+$\neg$ add(N1,s(0),N) && $\vee$ $\neg$ edge(S,E,L) \\
+$\neg$ greaterequ(s(s(s(s(0)))),N) && \\
+\hline
+
+$\neg$ edge(c,d,N1) $\vee$ & \{N1/s(s(0))\} & c3: edge(c, d, s(s(0))) \\
+$\neg$ add(N1,s(0),N) &&\\
+$\neg$ greaterequ(s(s(s(s(0)))),N) && \\
+\hline
+
+$\neg$ add(s(s(0)),s(0),N) $\vee$ & \{X/s(0),Y/s(0),N/s(Z)\} & c6: add(s(X),Y,s(Z)) \\
+$\neg$ greaterequ(s(s(s(s(0)))),N) && $\vee$ $\neg$ add(X,Y,Z) \\
+\hline
+
+$\neg$ add(s(0),s(0),s(Z)) $\vee$ & \{X'/s(0),Y'/s(0),Z/s(Z')\} & c6: add(s(X'),Y',s(Z')) \\
+$\neg$ greaterequ(s(s(s(s(0)))),s(Z)) && $\vee$ $\neg$ add(X',Y',Z') \\
+\hline
+
+$\neg$ add(0,s(0),s(s(Z'))) $\vee$ & \{Y''/s(0),Z'/Y''\} & c5: add(0,Y'',Y'') \\
+$\neg$ greaterequ(s(s(s(s(0)))),s(s(Z'))) && \\
+\hline
+
+$\neg$ greaterequ(s(s(s(s(0)))),s(s(s(0)))) & \{X/s(s(s(0))),Y/s(s(s(0)))\} & c8: greaterequ(s(X), s(Y)) \\
+&& $\vee$ $\neg$ greaterequ(X,Y) \\
+\hline
+
+$\neg$ greaterequ(s(s(s(0))),s(s(0))) & \{X'/s(s(0)),Y'/s(s(0))\} & c8: greaterequ(s(X'), s(Y')) \\
+&& $\vee$ $\neg$ greaterequ(X',Y') \\
+\hline
+
+$\neg$ greaterequ(s(s(0)),s(0)) & \{X''/s(0),Y''/s(0)\} & c8: greaterequ(s(X''), s(Y'')) \\
+&& $\vee$ $\neg$ greaterequ(X'',Y'') \\
+\hline
+
+$\neg$ greaterequ(s(0),0) & \{X'''/s(0)\} & c7: greaterequ(X''',0) \\
+\hline
+
+$\square$ & &  \\
+\hline
+
+\end{tabular}
+
+We can say, that the input 
+
+% Bsp 5 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+
+% 1.
+\setcounter{secnumdepth}{1}
+\subsubsection{1.}
+
+less(0, s(Y)).\\
+less(s(X),s(Y)) := less(X,Y).\\\\
+union(null,null,null).\\
+union(null,Y,Y).\\
+union(X,null,X).\\\\
+union(build(X,Xs),null,build(X,Zs)) := union(Xs,null,Zs).\\
+union(null,build(Y,Ys),build(Y,Zs)) := union(null,Ys,Zs).\\\\
+union(build(Z,Xs),build(Z,Ys),build(Z,Zs)) := union(Xs,Ys,Zs).\\
+union(build(X,Xs),build(Y,Ys),build(X,Zs)) := less(X,Y), union(Xs,build(Y,Ys),Zs).\\
+union(build(X,Xs),build(Y,Ys),build(Y,Zs)) := less(Y,X), union(build(X,Xs),Ys,Zs).\\
+
+% 2.
+\subsubsection{2.}
+
+\begin{tabular}{L{1.5cm} | L{13.5cm}}
+
+& Resolution for Example 5 Nr. 2 \\
+\hline \hline
+Program &
+:= union(build(0, build(s(s(0)), null)), build(s(0) , null), build(0, build(s(0), build(s(s(0)), null)))).\\
+\hline
+Rule &
+union(build(X,XS),build(Y,Ys),build(X,Zs)) := less(X,Y), union(XS,build(Y,YS),Zs).\\
+\hline
+MGU &
+\{X/0,Xs/build(s(s(0)), null),Y/s(0),Ys/null,Zs/build(s(0), build(s(s(0)), null))\}\\
+\hline\hline
+
+Program &
+:= less(0,s(0)), union(build(s(s(0)), null),build(s(0),null),build(s(0), build(s(s(0)), null))).\\
+\hline
+Rule &
+less(0, s(Y)).\\
+\hline
+MGU &
+\{Y/0\}\\
+\hline\hline
+
+Program &
+:= union(build(s(s(0)), null),build(s(0),null),build(s(0), build(s(s(0)), null))).\\
+\hline
+Rule &
+union(build(X,Xs),build(Y,Ys),build(Y,Zs)) := less(Y,X), union(build(X,Xs),Ys,Zs).\\
+\hline
+MGU &
+\{X/s(s(0)),Xs/null,Y/s(0),Ys/null,Zs/build(s(s(0)), null)\}\\
+\hline\hline
+
+Program &
+:= less(s(0),s(s(0))), union(build(s(s(0)),null),null,build(s(s(0)), null)).\\
+\hline
+Rule &
+less(s(X),s(Y)) := less(X,Y).\\
+\hline
+MGU &
+\{X/0,Y/s(0)\}\\
+\hline\hline
+
+Program &
+:= less(0,s(0)), union(build(s(s(0)),null),null,build(s(s(0)), null)).\\
+\hline
+Rule &
+less(0, s(Y)).\\
+\hline
+MGU &
+\{Y/0\}\\
+\hline\hline
+
+Program &
+:= union(build(s(s(0)),null),null,build(s(s(0)), null)).\\
+\hline
+Rule &
+union(build(X,Xs),null,build(X,Zs)) := union(Xs,null,Zs).\\
+\hline
+MGU &
+\{X/s(s(0)),Xs/null,Zs/null\}\\
+\hline\hline
+
+Program &
+:= union(null,null,null).\\
+\hline
+Rule &
+union(null,null,null).\\
+\hline
+MGU &
+\{\}\\
+\hline\hline
+
+Program &
+$\square$\\
+\hline
+
+\end{tabular}
+
+\end{document}

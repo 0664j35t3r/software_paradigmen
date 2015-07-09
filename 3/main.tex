@@ -1,0 +1,227 @@
+\documentclass[10pt, a4paper]{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+%\usepackage[euler]{textgreek}
+\usepackage{algpseudocode}
+\usepackage[ngerman]{babel}
+
+\usepackage{fancyvrb}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+
+\usepackage{amssymb, amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{ngerman}
+\usepackage{fancyhdr}
+\usepackage{fullpage}
+\usepackage{alltt}
+\usepackage{soul}
+\pagestyle{fancy}
+\setlength{\headheight}{12.4pt}
+\setlength{\headsep}{1.5\headheight}
+
+% Ãœbungsblatt-Nummer eintragen
+\newcommand{\AssignmentNumber}{2}
+
+% 1. Person eintragen
+\newcommand{\FirstAuthor}{LORENZ}
+\newcommand{\FirstAuthorFirstName}{Peter}
+\newcommand{\FirstAuthorMatnum}{}
+
+% 2. Person eintragen
+\newcommand{\SecAuthor}{ZIKO}
+\newcommand{\SecAuthorFirstName}{Haris}
+\newcommand{\SecAuthorMatnum}{}
+
+%\newcommand{\ul}{\underline}
+%\newcommand{\omega}{$\omega$}
+%\newcommand{\omega'}{$\omega'$}
+%\newcommand{\vert}{$\vert$}
+%\newcommand{\delta}{$\delta$}
+\newcommand{\AuthorFront}{{\normalsize
+\begin{tabular}{|c|c|c|} \hline
+    \textbf{Nachname} & \textbf{Vorname}       & \textbf{Matrikelnummer} \\ \hline \hline
+    \FirstAuthor      & \FirstAuthorFirstName  & \FirstAuthorMatnum      \\ \hline
+    \SecAuthor        & \SecAuthorFirstName    & \SecAuthorMatnum        \\ \hline
+\end{tabular}}}
+
+\author{\AuthorFront}
+\newcommand{\Author}{\FirstAuthorMatnum, \SecAuthorMatnum}
+
+\date{} % Kein Datum angegeben
+\fancyfoot{} % Seitenzahl unten nicht anzeigen
+
+\lhead{Excercise \AssignmentNumber}
+\chead{\Author}
+\rhead{Page \thepage}
+
+\title{Software Paradigms SS 2015 \AssignmentNumber}
+
+\newcommand{\letpi}{$\pi$}
+\newcommand{\letomega}{$\omega$}
+
+\newcommand{\InterA}{$I_{\mathcal{A}}$}
+\newcommand{\InterP}{$I_{\mathcal{P}}$}
+\newcommand{\InterT}{$I_{\mathcal{T}}$}
+
+\newcommand{\TildeVar}{$\mathcal{~}$}
+
+\newcommand{\unl}[1]{\underline{#1}}
+%\newcommand{\math}{\mathcal{A}}
+
+\begin{document}
+
+\newcommand{\seccounter}{\addtocounter{section}{1} \thesection}
+\newcommand{\beispiel}[2]{\subsection*{Exercise #1 \qquad}}
+\maketitle
+\thispagestyle{fancy}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Bsp 1 ------------------------------------------------------
+\beispiel{\seccounter}{1}
+
+\begin{verbatim}
+     1 begin
+     2 z := 1
+     3 foreach i in [1,2,3] do 
+     4   z := mul(z, i)
+     5 end
+    \end{verbatim} 
+    
+    Def.: formale Semantik für das Statement ($v \in IVS, t_1 \in T_L, a \in A$)
+    \begin{enumerate}
+     \item Assignements: $I_A(\omega,$ v \underline{:=} t) = w' $~_v$ $\omega$ und $w'(v)$=$I_T(\omega,t)$.
+     \item Schleifen: $I_A(\omega,$ \underline{foreach} $t_i$ \underline{do} a) 
+     = $I_A(I_A(\omega, a),$ \underline{foreach v do a}) wenn $I_T(\omega, t)$ mit t $\neq \varepsilon$.
+     \item mul: definiert im Skriptum v. D. Gruss (S.29)
+    \end{enumerate}
+
+    $I_A (\omega$, \underline{begin z := 1; foreach v in [1,2,3] do z := mul(z,v)} \\
+    = $I_A (I_A(\omega$, \underline{z := 1}), \underline{foreach v in [1,2,3] do} z:= mul(z,v)) \\
+
+    NE: $\omega$\textsuperscript{1} $\sim_{\unl{x}}$ $\omega$ und berechnen $\omega^1$ (\underline{z}) = $I_T$=($\omega, $\underline{1}) = 1 \\
+    
+      = $I_A$ ($\omega$\textsuperscript{1}, \underline{foreach v do mul(z,v))} \\
+      = mul($\omega$ \textsuperscript{1}(underline{z}), $\omega$ \textsuperscript{1}(underline{v})) = mul(1,1) = 1
+    
+    NR: $I_T $ ($\omega$\textsuperscript{1}, \underline{1}) und \underline{1} $\neq \varepsilon$ 
+    
+    
+    = $I_A(I_A(\omega$\textsuperscript{1}, \underline{z := mul(z,v)}), foreach v do mul(z,v)) \\
+    
+    
+    NE: $\omega$\textsuperscript{2} $\sim_{\unl{z}} \omega$ und berechnen $\omega^1$ (\underline{z}) = $I_T$=($\omega, $\underline{2}) = 2 \\
+    = mul($\omega$ \textsuperscript{2}(underline{z}), $\omega$ \textsuperscript{2}(underline{v})) = mul(1,2) = 2
+    
+    = $I_A(I_A(\omega$\textsuperscript{2}, \underline{z := mul(z,v)}), \underline{foreach v do mul(z,v))} \\
+    
+     NE: $\omega$\textsuperscript{3} $\sim_{\unl{z}} \omega$ und berechnen $\omega^3$ (\underline{z}) = $I_T$=($\omega, $\underline{3}) = 3 \\
+    = mul($\omega$ \textsuperscript{3}(underline{z}), $\omega$ \textsuperscript{3}(underline{v})) = mul(2,3) = 6
+    
+    = $I_A(I_A(\omega$\textsuperscript{3}, \underline{z := mul(z,v)}), \underline{foreach v do mul(z,v))} \\
+    
+    NE: $\omega$\textsuperscript{4} $\sim_{\unl{z}} \omega$ und berechnen $\omega^3$ (\underline{z}) = $I_T$=($\omega, \underline{\varepsilon}$) = $\varepsilon$ \\
+    
+Finished!
+    
+
+
+%\InterA
+
+%\InterP
+
+%\InterT
+
+% Bsp 2 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+
+Encoding for elements in A: \\
+prove, that this is true: \\
+\letpi((n,d)) = $build(n,build(d,[]))$ = $[n,d]$
+
+
+% Bsp 3 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+
+Encode for $f_{1}$:\vspace{0pt}\\
+\letpi[insert](s, i) = if eq?(s, []) then build(i, []) else\vspace{2pt}\\
+if eq?(first(s), i) then s else build(first(s), insert(rest(s), i))\vspace{2pt}\\
+Dies ist eine rekursive Lösung, die als erstes Abfragt ob eine leere Menge gegeben ist, andererseits wird rekursiv überprüft, ob die Zahl i in der Menge mitenthalten ist. Wenn die Zahl nicht in der Liste ist, dann wir sie am Ende der List dazugehängt. Ansonsten wird die normale Liste zurückretuniert. \\
+
+\letpi[insert](s, i) = if eq?(s, []) then [] else\vspace{2pt}\\
+if eq?(first(s), i) then rest(s) else build(first(s), insert(rest(s), i))\vspace{2pt}\\
+Dies ist eine rekursive Lösung, die als erstes Abfragt ob eine leere Menge gegeben ist, andererseits wird rekursiv überprüft, ob die Zahl i in der Menge mitenthalten ist. Wenn die Zahl in der Liste enthalten ist, dann wird sie von der Liste entfernt. Ansonsten wird die normale Liste zurückretuniert.\\
+
+\letpi[isEmpty?](s) = if eq?(s, []) then T else F
+
+Hier wird überprüft, ob die Liste leer ist oder nicht. Wenn sie leer ist, dann wird True zurückgegeben, ansonsten False.
+
+\letpi[isElement?](s, i) = if eq?(s, []) then F else if eq?(first(s), i) then T else isElement?(rest(s), i)
+
+\letpi((emptyS)) = if eq?(emptyS, []) then [] else emptyS
+
+% Bsp 4 ------------------------------------------------------
+\beispiel{\seccounter}{2}
+
+1st: \unl{$(\forall x)(\exists y)$ eq?(mult(x,y),x)} 
+\vspace{12pt} \\
+\InterP(\letomega, \unl{$(\forall x)(\exists y)$ eq?(mult(x,y),x)}) \vspace{2pt} \\
+$\iff$ $\forall \omega', \omega \sim_{\unl{x}} \omega' : $\InterP($\omega'$, \unl{$(\exists y)$ eq?(mult(x,y),x)}) \vspace{2pt} \\
+$\iff$ $\forall \omega', \omega \sim_{\unl{x}} \omega' : \exists \omega'', \omega' \sim_{\unl{y}} \omega'' : $\InterP($\omega''$, \unl{eq?(mult(x,y),x)}) \vspace{2pt} \\
+$\iff$ $\forall \omega', \omega \sim_{\unl{x}} \omega' : \exists \omega'', \omega' \sim_{\unl{y}} \omega'' : $eq?(\InterP($\omega''$, \unl{(mult(x,y),x)})) \vspace{2pt} \\
+$\iff$ $\forall \omega', \omega \sim_{\unl{x}} \omega' : \exists \omega'', \omega' \sim_{\unl{y}} \omega'' :$ eq?(\InterP($\omega''$, \unl{(mult(x,y))}), \InterP($\omega''$, \unl{x})) \vspace{2pt} \\
+$\iff$ $\forall \omega', \omega \sim_{\unl{x}} \omega' : \exists \omega'', \omega' \sim_{\unl{y}} \omega'' :$ eq?(mult(\InterP($\omega''$,\unl{x}),\InterP($\omega''$,\unl{y})), \InterP($\omega''$, \unl{x})) \vspace{2pt} \\
+$\iff$ $\forall \omega', \omega \sim_{\unl{x}} \omega' : \exists \omega'', \omega' \sim_{\unl{y}} \omega'' :$ eq?(mult($\omega''$(\unl{x}),$\omega''$(\unl{y})),$\omega''$(\unl{x})) \vspace{12pt}
+
+When we say, that $\omega''$(\unl{x}) = x and $\omega''$(\unl{y}) = y, then we can say that $x\cdot y=x$ only when y is 1.
+
+We can say for $(\forall x)(\exists y) x \cdot y = x$ only true, if and only if $y = 1$.
+
+Therefore we can say that: \\
+$\iff T$ \\
+is valid \\
+
+2nd: \unl{$(\forall x)$eq?(build(x,nil),nil)$\lor$eq?(1,x)} \vspace{12pt} \\
+$\iff$ \InterP($\omega$, \unl{$(\forall x)$eq?(build(x,nil),nil)$\lor$eq?(1,x)}) \vspace{2pt} \\
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega' :$ \InterP($\omega'$, \unl{eq?(build(x,nil),nil)$\lor$eq?(1,x)}) \vspace{2pt} \\
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega' :$ \InterP($\omega'$,\unl{eq?(build(x,nil),nil)}))$\lor$ \InterP($\omega'$,\unl{eq?(1,x)}) \vspace{2pt} \\
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega' :$ \InterP($\omega'$,\unl{eq?(build(x,nil),nil)}))$\lor$ eq?(\InterP($\omega'$,\unl{1}),\InterP($\omega'$,\unl{x})) \vspace{2pt} \\
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega' :$ eq?(\InterP($\omega'$,\unl{build(x,nil)}),\InterP($\omega'$,\unl{nil}))$\lor$ eq?(\InterP($\omega'$,\unl{1}),$\omega'$(\unl{x})) \vspace{2pt} \\
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega' :$ eq?(build(\InterP($\omega'$,\unl{x}),\InterP($\omega'$,\unl{nil})),\InterP($\omega'$,\unl{nil}))$\lor$ eq?($\omega'$(\unl{1}),$\omega'$(\unl{x})) \vspace{2pt}  \\
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega' :$ eq?(build(\InterP($\omega'$,\unl{x}),\InterP($\omega'$,\unl{nil})),$\omega'$(\unl{nil}))$\lor$ eq?($\omega'$(\unl{1}),$\omega'$(\unl{x})) \vspace{2pt} \\
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega' :$ eq?(build(\InterP($\omega'$,\unl{x}),$\omega'$(\unl{nil})),$\omega'$(\unl{nil}))$\lor$ eq?($\omega'$(\unl{1}),$\omega'$(\unl{x})) \vspace{2pt} \\
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega' :$ eq?(build($\omega'$(\unl{x}),$\omega'$(\unl{nil})),$\omega'$(\unl{nil}))$\lor$ eq?($\omega'$(\unl{1}),$\omega'$(\unl{x})) \vspace{6pt} \\
+We can now say that $\omega'(\unl{x}) = x$ and $\omega'(nil) = []$, then we get \vspace{6pt} \\
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega' :$ eq?(build(x,[]),[])$\lor$eq?(1,x) \vspace{6pt} \\
+When we write it more mathematically, it will look like \vspace{6pt} \\
+$\forall x : ([x] = []) \lor 1 = x$ \vspace{6pt} \\
+For $\forall$ we only need one contra example, e.g. $x = 2$ we can see that this make the whole statement False therefore we can say: \vspace{6pt} \\
+$\iff F$ \\
+
+
+3rd:($\forall x$)($\neg$ eq?(x,y) $\rightarrow$ gt?(x,y)) \dots Datentyp $N$
+
+\InterP(\letomega, \unl{$(\forall x$)($\neg$ eq?(x,y) $\rightarrow$ gt?(x,y))}) \vspace{2pt} \\
+
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega'$ : \InterP($\omega'$,$\neg$ eq?(x,y) $\rightarrow$ gt?(x,y)))
+
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega'$ : \InterP($\omega'$, $\neg$ eq?(x,y)) $\rightarrow$ \InterP gt?(x,y))
+
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega'$ : $\neg$\InterP($\omega'$,  eq?(x,y)) $\rightarrow$ \InterP($\omega'$, gt?(x,y))
+
+$\iff$ $\forall \omega$',$\omega \sim_{\unl{x}} \omega'$ : $\neg$ eq?(\InterP(x,y)) $\rightarrow$  gt?(\InterP(x,y))
+
+$\iff$ $\forall \omega',\omega \sim_{\unl{x}} \omega'$ : $\neg$ eq?(x,y) $\rightarrow$ gt?(x,y)
+
+\end{document}
